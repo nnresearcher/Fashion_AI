@@ -73,6 +73,10 @@
 
 6.保存学习后的权重。
 
+### 其余函数
+
+densenet_updated_GN.py 与 groupnorm.py 为获取densenet121结构的辅助函数，其中配套的权重保存在对应目录的desnet_weight文件夹中
+
 ## 测试步骤说明
 
 ### preprocess.py
@@ -104,3 +108,7 @@
 5.提取输出数据中感兴趣的部分并进行归一化，得到每个标签的概率值。
 
 6.将图像名字，标签，以及对应概率保存为csv文件。
+
+### 其余函数
+
+densenet_updated_GN.py 与 groupnorm.py 为获取densenet121结构的辅助函数，其中配套的权重保存在对应目录的desnet_weight文件夹中
