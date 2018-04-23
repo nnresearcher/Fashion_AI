@@ -35,6 +35,8 @@
   
 ## 训练步骤说明
   
+先运行preprocess.py生成过渡文件，再运行run.py生成模型权重
+
 ### preprocess.py
 
 运行 preprocess.py
@@ -78,6 +80,8 @@
 densenet_updated_GN.py 与 groupnorm.py 为获取densenet121结构的辅助函数，其中配套的权重保存在对应目录的desnet_weight文件夹中
 
 ## 测试步骤说明
+
+运行run.py直接生成结果文件
 
 ### preprocess.py
 
