@@ -4,7 +4,7 @@ Created on Wed Mar 24 14:12:25 2018
 
 @author: wwt
 """
-from basic_function import loss, accuracy, data_generator
+from help import loss, accuracy, data_generator
 from models import model_build
 import pandas as pd
 from keras.optimizers import SGD
@@ -29,11 +29,6 @@ model_name = r"my_model.h5"
 data_divide_into_train_and_test = r"train_and_test_lable.csv" #划分训练集测试集后的保存
 ####↑↑↑↑↑↑↑↑↑↑↑↑↑↑模型路径↑↑↑↑↑↑↑↑↑↑↑↑######
 
-####↓↓↓↓↓↓↓↓↓↓↓↓↓↓图像大小↓↓↓↓↓↓↓↓↓↓↓######
-first_layer_size=(pic_size, pic_size)
-image_input_shape=(pic_size, pic_size, 3)
-####↑↑↑↑↑↑↑↑↑↑↑↑↑↑图像大小↑↑↑↑↑↑↑↑↑↑↑↑######
-
 ##↓↓↓↓↓↓↓↓↓↓↓↓↓↓训练数据与测试数据↓↓↓↓↓↓↓↓↓↓↓######
 train_and_test_lable = pd.read_csv(data_divide_into_train_and_test)#训练集的图像标签
 
@@ -50,20 +45,20 @@ test_data_lable = [eval(x) for x in list(train_and_test_lable[train_and_test_lab
 train_datagen = data_generator( data_image_path=train_data_image_path,
                                 data_lable=train_data_lable,
                                 batch_size=batch_size,
-                                target_size=first_layer_size,
+                                target_size=(pic_size, pic_size),
                                 ifenhance=train_data_hance)
 
 #生成validation_datagen
 validation_datagen = data_generator( data_image_path=test_data_image_path, 
                                      data_lable=test_data_lable, 
                                      batch_size=batch_size, 
-                                     target_size=first_layer_size, 
+                                     target_size=(pic_size, pic_size), 
                                      ifenhance=False)
 ##↑↑↑↑↑↑↑↑↑↑↑↑↑↑训练数据与测试数据↑↑↑↑↑↑↑↑↑↑↑↑######
 
 
 ##↓↓↓↓↓↓↓↓↓↓↓↓↓↓生成模型↓↓↓↓↓↓↓↓↓↓↓######
-model = model_build(input_shape=image_input_shape, classes=class_num, dropout=dropout)
+model = model_build(input_shape=(pic_size, pic_size, 3), classes=class_num, dropout=dropout)
 optimizer = SGD(lr=learn_rate, momentum=momentum)
 model.compile(loss=loss, optimizer=optimizer, metrics=[accuracy])
 ##↑↑↑↑↑↑↑↑↑↑↑↑↑↑生成模型↑↑↑↑↑↑↑↑↑↑↑↑######
@@ -89,5 +84,3 @@ model.fit_generator(generator=train_datagen,
 model.save_weights(model_name) 
 print("train_over")
 ##↑↑↑↑↑↑↑↑↑↑↑↑↑↑保存模型↑↑↑↑↑↑↑↑↑↑↑######
-
-

@@ -57,10 +57,8 @@ def get_image_and_label(image_path,label_path,save_path):
     return input_image_Path, output_label_code
 
 test_in_all_data_size=0.15
-##��ȡ�ļ���·��
 input_image_path = r'../../data/base/Images' 
 output_label_path = r'../../data/base/Annotations/label.csv' 
-##�����ļ���·��
 imagelabel_path = r"imagelabel.csv" 
 data_divide_nto_train_and_test = r"train_and_test_lable.csv"
 
